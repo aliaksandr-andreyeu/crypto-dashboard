@@ -2,6 +2,9 @@ import React from "react"
 import { Link } from "react-router-dom"
 
 import { Row, Col, Card } from 'antd'
+import { Select } from 'antd'
+
+const Option = Select.Option
 
 import { Chart } from "react-google-charts"
 
@@ -24,13 +27,24 @@ class Ethereum extends React.Component {
 		}
 	}	
 	
+	onChange = ( v ) => {
+		console.log( v );
+	}
 
 	render = () => {
 		
 		return (
 			<Row gutter={16}>
 				<Col span={24}>
-					<Card className="dash-card" title="Historical Daily Ethereum">
+					<Card className="dash-card" title="Historical Daily Ethereum" extra={
+						<Select className="dash-select" defaultValue="open" onChange={this.onChange}>
+							<Option value="all">All</Option>
+							<Option value="open">Open</Option>
+							<Option value="high">High</Option>
+							<Option value="low">Low</Option>
+							<Option value="close">Close</Option>
+						</Select>
+					}>
 						<Chart
 							chartType="ScatterChart"
 							data={[["Age", "Weight"], [4, 5.5], [8, 12]]}

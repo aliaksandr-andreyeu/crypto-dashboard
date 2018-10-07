@@ -361,15 +361,44 @@ body
 				display: block
 				
 				.ant-card-head
-					padding: 0 16px
+					padding: 0 10px 0 16px
 					min-height: 40px
 					background-color: #b2bcc7
 					
 					.ant-card-head-wrapper
 						.ant-card-head-title
 							padding: 8px 0
-						
+							
+					.ant-card-extra
+						padding: 6px 0
 						
 				.ant-card-body
 					padding: 16px 16px 24px
 
+		.dash-select.ant-select
+			position: relative
+			display: block
+			
+			width: 90px
+			
+			.ant-select-selection
+				height: 28px
+				
+				.ant-select-selection__rendered
+					line-height: 26px
+					
+.ant-select-dropdown-menu-item
+	padding: 3px 12px
+	transition: background-color 0.2s linear, color 0.2s linear
+	
+	&.ant-select-dropdown-menu-item-selected
+		background-color: #e5e8ec
+		
+		
+		&.ant-select-dropdown-menu-item-active
+			background-color: #ff0e49
+			color: #ffffff
+			
+	&.ant-select-dropdown-menu-item-active
+		background-color: #ff0e49
+		color: #ffffff

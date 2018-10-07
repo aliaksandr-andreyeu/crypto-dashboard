@@ -2,6 +2,9 @@ import React from "react"
 import { Link } from "react-router-dom"
 
 import { Row, Col, Card } from 'antd'
+import { Select } from 'antd'
+
+const Option = Select.Option
 
 import { Chart } from "react-google-charts"
 
@@ -35,15 +38,49 @@ class Home extends React.Component {
 		}
 	}	
 
+	onChange = ( v ) => {
+		console.log( v );
+	}
+	
 	render = () => {
-		
+
+	const data = [
+  ["time", "open"],
+  [8, 12],
+  [4, 5.5],
+  [11, 14],
+  [4, 5],
+  [3, 3.5],
+  [6.5, 7]
+];
+ 
+const options = {
+  hAxis: { title: "time", viewWindow: { min: 0, max: 15 } },
+  vAxis: { title: "open", viewWindow: { min: 0, max: 15 } }
+
+};		
+
+
+
 		return (
 			<Row gutter={16}>
 				<Col span={12}>
-					<Card className="dash-card" title="Historical Daily Bitcoin">
+					<Card className="dash-card" title="Historical Daily Bitcoin" extra={
+						<Select className="dash-select" defaultValue="open" onChange={this.onChange}>
+							<Option value="all">All</Option>
+							<Option value="open">Open</Option>
+							<Option value="high">High</Option>
+							<Option value="low">Low</Option>
+							<Option value="close">Close</Option>
+						</Select>
+					}>
 						<Chart
 							chartType="ScatterChart"
-							data={[["Age", "Weight"], [4, 5.5], [8, 12]]}
+							
+							options={options}
+							
+							data={data}
+							
 							width="100%"
 							height="400px"
 							legendToggle
@@ -51,7 +88,15 @@ class Home extends React.Component {
 					</Card>
 				</Col>
 				<Col span={12}>
-					<Card className="dash-card" title="Historical Daily Ethereum">
+					<Card className="dash-card" title="Historical Daily Ethereum" extra={
+						<Select className="dash-select" defaultValue="open" onChange={this.onChange}>
+							<Option value="all">All</Option>
+							<Option value="open">Open</Option>
+							<Option value="high">High</Option>
+							<Option value="low">Low</Option>
+							<Option value="close">Close</Option>
+						</Select>
+					}>
 						<Chart
 							chartType="ScatterChart"
 							data={[["Age", "Weight"], [4, 5.5], [8, 12]]}
