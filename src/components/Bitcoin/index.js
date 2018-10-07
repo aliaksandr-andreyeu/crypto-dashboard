@@ -12,6 +12,7 @@ import axios from 'axios'
 
 class Bitcoin extends React.Component {
 	
+
 	componentDidMount = async () => {
 
 		const btc_url = 'https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=100'
@@ -28,7 +29,9 @@ class Bitcoin extends React.Component {
 		
 	}	
 	
-	onChange = ( v ) => {
+	onChangeBtc = ( v ) => {
+		
+		this.props.handleSelectBTC( v )
 		console.log( v );
 	}
 
@@ -39,7 +42,7 @@ class Bitcoin extends React.Component {
 			<Row gutter={16}>
 				<Col span={24}>
 					<Card className="dash-card" title="Historical Daily Bitcoin" extra={
-						<Select className="dash-select" defaultValue="open" onChange={this.onChange}>
+						<Select className="dash-select" defaultValue={this.props.selectBTC} onChange={this.onChangeBtc}>
 							<Option value="all">All</Option>
 							<Option value="open">Open</Option>
 							<Option value="high">High</Option>

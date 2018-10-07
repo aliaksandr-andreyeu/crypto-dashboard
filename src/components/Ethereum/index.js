@@ -12,6 +12,7 @@ import axios from 'axios'
 
 class Ethereum extends React.Component {
 	
+
 	componentDidMount = async () => {
 
 		const eth_url = 'https://min-api.cryptocompare.com/data/histoday?fsym=ETH&tsym=USD&limit=100'
@@ -27,7 +28,10 @@ class Ethereum extends React.Component {
 		}
 	}	
 	
-	onChange = ( v ) => {
+	
+	onChangeEth = ( v ) => {
+		
+		this.props.handleSelectETH( v )
 		console.log( v );
 	}
 
@@ -37,7 +41,7 @@ class Ethereum extends React.Component {
 			<Row gutter={16}>
 				<Col span={24}>
 					<Card className="dash-card" title="Historical Daily Ethereum" extra={
-						<Select className="dash-select" defaultValue="open" onChange={this.onChange}>
+						<Select className="dash-select" defaultValue={this.props.selectETH} onChange={this.onChangeEth}>
 							<Option value="all">All</Option>
 							<Option value="open">Open</Option>
 							<Option value="high">High</Option>

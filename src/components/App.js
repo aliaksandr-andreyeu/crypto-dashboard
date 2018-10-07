@@ -25,23 +25,51 @@ const { Header, Sider, Content } = Layout
 class App extends React.Component {
 
 	state = {
+		selectHomeBTC: 'all',
+		selectHomeETH: 'all',
+		selectCmpBTC: 'all',
+		selectCmpETH: 'all',		
+	}
+	
+	handleSelectHomeBTC = value => {
+		this.setState({
+			selectHomeBTC: value,
+		})
 	}
 
+	handleSelectHomeETH = value => {
+		this.setState({
+			selectHomeETH: value,
+		})
+	}
+
+	handleSelectCmpBTC = value => {
+		this.setState({
+			selectCmpBTC: value,
+		})
+	}
+	
+	handleSelectCmpETH = value => {
+		this.setState({
+			selectCmpETH: value,
+		})
+	}
+	
 	render = () => {
 
 		const routes = [
 			{
 				path: "/",
 				exact: true,
-				render: () => <Home />,
+				render: () => <Home handleSelectBTC={this.handleSelectHomeBTC} handleSelectETH={this.handleSelectHomeETH} selectBTC={this.state.selectHomeBTC} selectETH={this.state.selectHomeETH} />,
 			},
 			{
 				path: "/bitcoin",
-				render: () => <Bitcoin />
+				render: () => <Bitcoin handleSelectBTC={this.handleSelectCmpBTC} selectBTC={this.state.selectCmpBTC} />
 			},
 			{
 				path: "/ethereum",
-				render: () => <Ethereum />
+				render: () => <Ethereum handleSelectETH={this.handleSelectCmpETH} selectETH={this.state.selectCmpETH} />
 			},
 		]
 

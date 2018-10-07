@@ -38,12 +38,20 @@ class Home extends React.Component {
 		}
 	}	
 
-	onChange = ( v ) => {
+	onChangeBtc = ( v ) => {
+		
+		this.props.handleSelectBTC( v )
 		console.log( v );
 	}
 	
-	render = () => {
+	onChangeEth = ( v ) => {
+		
+		this.props.handleSelectETH( v )
+		console.log( v );
+	}
 
+	render = () => {
+		
 	const data = [
   ["time", "open"],
   [8, 12],
@@ -59,14 +67,14 @@ const options = {
   vAxis: { title: "open", viewWindow: { min: 0, max: 15 } }
 
 };		
-
+		console.log( this.props )
 
 
 		return (
 			<Row gutter={16}>
 				<Col span={12}>
 					<Card className="dash-card" title="Historical Daily Bitcoin" extra={
-						<Select className="dash-select" defaultValue="open" onChange={this.onChange}>
+						<Select className="dash-select" defaultValue={this.props.selectBTC} onChange={this.onChangeBtc}>
 							<Option value="all">All</Option>
 							<Option value="open">Open</Option>
 							<Option value="high">High</Option>
@@ -89,7 +97,7 @@ const options = {
 				</Col>
 				<Col span={12}>
 					<Card className="dash-card" title="Historical Daily Ethereum" extra={
-						<Select className="dash-select" defaultValue="open" onChange={this.onChange}>
+						<Select className="dash-select" defaultValue={this.props.selectETH} onChange={this.onChangeEth}>
 							<Option value="all">All</Option>
 							<Option value="open">Open</Option>
 							<Option value="high">High</Option>
