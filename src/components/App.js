@@ -47,6 +47,20 @@ class App extends React.Component {
 
 		const routesMap = routes.map((route, i) => <Route {...route} key={i} />)
 		
+		const logo_icon = (
+			<svg 
+				className="logo-img"
+				height="1em"
+				width="1em"
+				viewBox="0 0 256 290" 
+			>
+				<g>
+					<path d="M233.153208,212.286792 L132.250566,269.427925 L132.250566,224.990189 L195.139623,190.357736 L233.153208,212.286792 Z M240.060377,206.055849 L240.060377,86.6535849 L203.157736,107.954717 L203.157736,184.754717 L240.060377,206.055849 Z M22.4603774,212.286792 L123.363019,269.379623 L123.363019,224.941887 L60.4739623,190.357736 L22.4603774,212.286792 L22.4603774,212.286792 Z M15.5532075,206.055849 L15.5532075,86.6535849 L52.4558491,107.954717 L52.4558491,184.754717 L15.5532075,206.055849 L15.5532075,206.055849 Z M19.8520755,78.925283 L123.363019,20.3833962 L123.363019,63.3720755 L57.0445283,99.84 L56.5132075,100.129811 L19.8520755,78.925283 L19.8520755,78.925283 Z M235.713208,78.925283 L132.250566,20.3833962 L132.250566,63.3720755 L198.520755,99.8883019 L199.052075,100.178113 L235.713208,78.925283 L235.713208,78.925283 Z" fill="#ffffff" />
+					<path d="M123.363019,214.846792 L61.3433962,180.697358 L61.3433962,113.123019 L123.363019,148.914717 L123.363019,214.846792 L123.363019,214.846792 Z M132.250566,214.846792 L194.270189,180.74566 L194.270189,113.123019 L132.250566,148.914717 L132.250566,214.846792 Z M65.4973585,105.298113 L127.806792,71.0520755 L190.067925,105.298113 L127.806792,141.234717 L65.4973585,105.298113 L65.4973585,105.298113 Z" fill="#ffffff" />
+				</g>
+			</svg>
+		)		
+		
 		const bitcoin_icon = (
 			<svg
 				fill="currentColor"
@@ -70,12 +84,12 @@ class App extends React.Component {
 				viewBox="0 0 226.777 226.777"
 			>
 				<g>
-					<polygon fill="#231F20" points="112.553,157 112.553,86.977 44.158,116.937  "/>
-					<polygon fill="#231F20" points="112.553,82.163 112.553,-0.056 46.362,111.156  "/>
-					<polygon fill="#231F20" points="116.962,-0.09 116.962,82.163 184.083,111.566  "/>
-					<polygon fill="#231F20" points="116.962,86.977 116.962,157.002 185.405,116.957  "/>
-					<polygon fill="#231F20" points="112.553,227.406 112.553,171.085 44.618,131.31  "/>
-					<polygon fill="#231F20" points="116.962,227.406 184.897,131.31 116.962,171.085  "/>
+					<polygon points="112.553,157 112.553,86.977 44.158,116.937  "/>
+					<polygon points="112.553,82.163 112.553,-0.056 46.362,111.156  "/>
+					<polygon points="116.962,-0.09 116.962,82.163 184.083,111.566  "/>
+					<polygon points="116.962,86.977 116.962,157.002 185.405,116.957  "/>
+					<polygon points="112.553,227.406 112.553,171.085 44.618,131.31  "/>
+					<polygon points="116.962,227.406 184.897,131.31 116.962,171.085  "/>
 				</g>
 			</svg>
 		)
@@ -84,10 +98,10 @@ class App extends React.Component {
 			<div className="dashboard">
 				<LocaleProvider>
 					<Layout className="main-layout">
-						<Header className="header">
+						<Header className="header clear">
 							<div className="logo">
 								<a href="/" title="Crypto">
-									<img src="/img/logo.png" />
+									{logo_icon}
 								</a>
 							</div>
 							<a
@@ -101,7 +115,7 @@ class App extends React.Component {
 							</a>
 						</Header>
 						<Layout>
-							<Sider className="sider main">
+							<Sider className="sider-main">
 								<Menu
 									className="left-menu"
 									theme="light"
@@ -109,21 +123,21 @@ class App extends React.Component {
 									selectedKeys={[location.pathname]}
 								>
 									<Menu.Item key="/">
-										<NavLink to="/">
+										<NavLink className="left-menu-link" to="/">
 											<FaHome className="left-menu-icon" />
 											<span className="nav-text left-menu-text">Home</span>
 										</NavLink>
 									</Menu.Item>
 									<Menu.Item key="/bitcoin">
-										<NavLink to="/bitcoin">
+										<NavLink className="left-menu-link" to="/bitcoin">
 											{bitcoin_icon}
-											<span className="nav-text left-menu-text">bitcoin</span>
+											<span className="nav-text left-menu-text">Bitcoin</span>
 										</NavLink>
 									</Menu.Item>
 									<Menu.Item key="/ethereum">
-										<NavLink to="/ethereum">
+										<NavLink className="left-menu-link" to="/ethereum">
 											{etherium_icon}
-											<span className="nav-text left-menu-text">ethereum</span>
+											<span className="nav-text left-menu-text">Ethereum</span>
 										</NavLink>
 									</Menu.Item>
 								</Menu>

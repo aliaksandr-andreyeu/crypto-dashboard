@@ -4,6 +4,9 @@ const path = require("path")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
 const themeVariables = []
+themeVariables["@border-radius-base"] = "4px"
+themeVariables["@border-radius-sm"] = "4px"
+themeVariables["@primary-color"] = "#00397a"
 
 const plugins = [
 	new MiniCssExtractPlugin({
