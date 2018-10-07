@@ -142,7 +142,7 @@ class App extends React.Component {
 									</Menu.Item>
 								</Menu>
 							</Sider>
-							<Content>
+							<Content className="content-main">
 								<Switch>
 									<Redirect exact from="/login" to="/" />
 									{routesMap}
