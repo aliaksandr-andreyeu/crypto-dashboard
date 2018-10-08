@@ -2,15 +2,8 @@ import { Form, Layout, LocaleProvider, Menu, notification } from "antd"
 
 import React from "react"
 
-import FaStats from "react-icons/lib/fa/bar-chart"
-import FaCalendar from "react-icons/lib/fa/calendar"
-import FaCalendarPlusO from "react-icons/lib/fa/calendar-plus-o"
-import FaCogs from "react-icons/lib/fa/cogs"
 import FaHome from "react-icons/lib/fa/home"
-import FaVideoCamera from "react-icons/lib/fa/video-camera"
-import MdOndemandVideo from "react-icons/lib/md/ondemand-video"
 import FaSignOut from "react-icons/lib/fa/sign-out"
-import FaGroup from "react-icons/lib/fa/group"
 
 import { Link, NavLink, Redirect, Route, Switch, withRouter } from "react-router-dom"
 
@@ -27,8 +20,12 @@ class App extends React.Component {
 	state = {
 		selectHomeBTC: 'all',
 		selectHomeETH: 'all',
+		
 		selectCmpBTC: 'all',
-		selectCmpETH: 'all',		
+		selectCmpETH: 'all',
+		
+		BTC_data: false,
+		ETH_data: false, 
 	}
 	
 	handleSelectHomeBTC = value => {
@@ -55,21 +52,52 @@ class App extends React.Component {
 		})
 	}
 	
-	render = () => {
+	handleSetDataBTC = value => {
+		this.setState({
+			BTC_data: value,
+		})
+	}
 
+	handleSetDataETH = value => {
+		this.setState({
+			ETH_data: value,
+		})
+	}
+	
+	render = () => {
+		
 		const routes = [
 			{
 				path: "/",
 				exact: true,
-				render: () => <Home handleSelectBTC={this.handleSelectHomeBTC} handleSelectETH={this.handleSelectHomeETH} selectBTC={this.state.selectHomeBTC} selectETH={this.state.selectHomeETH} />,
+				render: () => <Home 
+					handleSelectBTC={this.handleSelectHomeBTC} 
+					handleSelectETH={this.handleSelectHomeETH} 
+					selectBTC={this.state.selectHomeBTC} 
+					selectETH={this.state.selectHomeETH} 
+					handleSetDataBTC={this.handleSetDataBTC} 
+					handleSetDataETH={this.handleSetDataETH} 
+					BTC_data={this.state.BTC_data} 
+					ETH_data={this.state.ETH_data} 
+				/>,
 			},
 			{
 				path: "/bitcoin",
-				render: () => <Bitcoin handleSelectBTC={this.handleSelectCmpBTC} selectBTC={this.state.selectCmpBTC} />
+				render: () => <Bitcoin 
+					handleSelectBTC={this.handleSelectCmpBTC} 
+					selectBTC={this.state.selectCmpBTC} 
+					handleSetDataBTC={this.handleSetDataBTC} 
+					BTC_data={this.state.BTC_data} 
+				/>
 			},
 			{
 				path: "/ethereum",
-				render: () => <Ethereum handleSelectETH={this.handleSelectCmpETH} selectETH={this.state.selectCmpETH} />
+				render: () => <Ethereum 
+					handleSelectETH={this.handleSelectCmpETH} 
+					selectETH={this.state.selectCmpETH} 
+					handleSetDataETH={this.handleSetDataETH} 
+					ETH_data={this.state.ETH_data} 
+				/>
 			},
 		]
 

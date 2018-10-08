@@ -12,63 +12,67 @@ import axios from 'axios'
 
 class Home extends React.Component {
 	
-	componentDidMount = async () => {
-
-		const btc_url = 'https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=100'
-		const eth_url = 'https://min-api.cryptocompare.com/data/histoday?fsym=ETH&tsym=USD&limit=100'
-		
-		try {
-			const btc_response = await axios.get( btc_url )
-			
-			console.log( btc_response.data )
-
-		} catch ( error ) {
-			
-			console.log( error )
-		}
-		
-		try {
-			const eth_response = await axios.get( eth_url )
-			
-			console.log( eth_response.data )
-
-		} catch ( error ) {
-			
-			console.log( error )
-		}
-	}	
-
 	onChangeBtc = ( v ) => {
-		
 		this.props.handleSelectBTC( v )
-		console.log( v );
 	}
 	
 	onChangeEth = ( v ) => {
-		
 		this.props.handleSelectETH( v )
-		console.log( v );
 	}
+	
+	componentDidMount = async () => {
+		
+		if ( !this.props.BTC_data ) {
+
+			const btc_url = 'https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=100'
+			
+			try {
+				const btc_response = await axios.get( btc_url )
+				
+				console.log( btc_response.data )
+
+				this.props.handleSetDataBTC( btc_response.data )
+				
+			} catch ( error ) {
+				
+				console.log( error )
+			}
+		}
+
+		if ( !this.props.ETH_data ) {
+			
+			const eth_url = 'https://min-api.cryptocompare.com/data/histoday?fsym=ETH&tsym=USD&limit=100'
+			
+			try {
+				const eth_response = await axios.get( eth_url )
+				
+				console.log( eth_response.data )
+
+				this.props.handleSetDataETH( eth_response.data )
+				
+			} catch ( error ) {
+				
+				console.log( error )
+			}
+		}
+	}		
 
 	render = () => {
 		
-	const data = [
-  ["time", "open"],
-  [8, 12],
-  [4, 5.5],
-  [11, 14],
-  [4, 5],
-  [3, 3.5],
-  [6.5, 7]
-];
- 
-const options = {
-  hAxis: { title: "time", viewWindow: { min: 0, max: 15 } },
-  vAxis: { title: "open", viewWindow: { min: 0, max: 15 } }
-
-};		
-		console.log( this.props )
-
+		const data = [
+			["time", "open"],
+			[8, 12],
+			[4, 5.5],
+			[11, 14],
+			[4, 5],
+			[3, 3.5],
+			[6.5, 7]
+		];
+	 
+		const options = {
+			hAxis: { title: "time", viewWindow: { min: 0, max: 15 } },
+			vAxis: { title: "open", viewWindow: { min: 0, max: 15 } }
+		};		
 
 		return (
 			<Row gutter={16}>

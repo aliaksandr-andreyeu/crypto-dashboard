@@ -12,28 +12,29 @@ import axios from 'axios'
 
 class Ethereum extends React.Component {
 	
-
-	componentDidMount = async () => {
-
-		const eth_url = 'https://min-api.cryptocompare.com/data/histoday?fsym=ETH&tsym=USD&limit=100'
-		
-		try {
-			const eth_response = await axios.get( eth_url )
-			
-			console.log( eth_response.data )
-
-		} catch ( error ) {
-			
-			console.log( error )
-		}
-	}	
-	
-	
 	onChangeEth = ( v ) => {
-		
 		this.props.handleSelectETH( v )
-		console.log( v );
 	}
+	
+	componentDidMount = async () => {
+		
+		if ( !this.props.ETH_data ) {
+			
+			const eth_url = 'https://min-api.cryptocompare.com/data/histoday?fsym=ETH&tsym=USD&limit=100'
+			
+			try {
+				const eth_response = await axios.get( eth_url )
+				
+				console.log( eth_response.data )
+				
+				this.props.handleSetDataETH( eth_response.data )
+
+			} catch ( error ) {
+				
+				console.log( error )
+			}
+		}
+	}		
 
 	render = () => {
 		

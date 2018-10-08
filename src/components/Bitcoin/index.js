@@ -12,29 +12,29 @@ import axios from 'axios'
 
 class Bitcoin extends React.Component {
 	
-
+	onChangeBtc = ( v ) => {
+		this.props.handleSelectBTC( v )
+	}
+	
 	componentDidMount = async () => {
 
-		const btc_url = 'https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=100'
-		
-		try {
-			const btc_response = await axios.get( btc_url )
-			
-			console.log( btc_response.data )
+		if ( !this.props.BTC_data ) {
 
-		} catch ( error ) {
+			const btc_url = 'https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=100'
 			
-			console.log( error )
+			try {
+				const btc_response = await axios.get( btc_url )
+				
+				console.log( btc_response.data )
+
+				this.props.handleSetDataBTC( btc_response.data )
+				
+			} catch ( error ) {
+				
+				console.log( error )
+			}
 		}
-		
-	}	
-	
-	onChangeBtc = ( v ) => {
-		
-		this.props.handleSelectBTC( v )
-		console.log( v );
-	}
-
+	}		
 
 	render = () => {
 		
