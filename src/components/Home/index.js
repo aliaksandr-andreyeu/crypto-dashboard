@@ -86,17 +86,16 @@ class Home extends React.Component {
 							<Option value="close">Close</Option>
 						</Select>
 					}>
-						<Chart
-							chartType="ScatterChart"
-							
-							options={options}
-							
-							data={data}
-							
-							width="100%"
-							height="400px"
-							legendToggle
-						/>					
+						<div className="dash-chart">
+							<Chart
+								chartType="ScatterChart"
+								options={options}
+								data={data}
+								width="100%"
+								height="400px"
+								legendToggle
+							/>
+						</div>
 					</Card>
 				</Col>
 				<Col span={12}>
@@ -109,13 +108,15 @@ class Home extends React.Component {
 							<Option value="close">Close</Option>
 						</Select>
 					}>
-						<Chart
-							chartType="ScatterChart"
-							data={[["Age", "Weight"], [4, 5.5], [8, 12]]}
-							width="100%"
-							height="400px"
-							legendToggle
-						/>					
+						<div className="dash-chart">					
+							<Chart
+								chartType="ScatterChart"
+								data={[["Age", "Weight"], [4, 5.5], [8, 12]]}
+								width="100%"
+								height="400px"
+								legendToggle
+							/>
+						</div>							
 					</Card>
 				</Col>
 			</Row>

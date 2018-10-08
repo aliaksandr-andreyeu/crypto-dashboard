@@ -50,13 +50,15 @@ class Ethereum extends React.Component {
 							<Option value="close">Close</Option>
 						</Select>
 					}>
-						<Chart
-							chartType="ScatterChart"
-							data={[["Age", "Weight"], [4, 5.5], [8, 12]]}
-							width="100%"
-							height="400px"
-							legendToggle
-						/>					
+						<div className="dash-chart">
+							<Chart
+								chartType="ScatterChart"
+								data={[["Age", "Weight"], [4, 5.5], [8, 12]]}
+								width="100%"
+								height="400px"
+								legendToggle
+							/>
+						</div>
 					</Card>
 				</Col>
 			</Row>

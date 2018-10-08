@@ -9316,6 +9316,10 @@ body {
     background-color: #ff0e49;
     color: #ffffff; }
 
+.dash-chart {
+  position: relative;
+  display: block; }
+
 /* stylelint-disable at-rule-empty-line-before,at-rule-name-space-after,at-rule-no-unknown */
 /* stylelint-disable no-duplicate-selectors */
 /* stylelint-disable */
