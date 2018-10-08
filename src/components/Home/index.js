@@ -29,8 +29,6 @@ class Home extends React.Component {
 			try {
 				const btc_response = await axios.get( btc_url )
 				
-				console.log( btc_response.data )
-
 				this.props.handleSetDataBTC( btc_response.data )
 				
 			} catch ( error ) {
@@ -46,8 +44,6 @@ class Home extends React.Component {
 			try {
 				const eth_response = await axios.get( eth_url )
 				
-				console.log( eth_response.data )
-
 				this.props.handleSetDataETH( eth_response.data )
 				
 			} catch ( error ) {
@@ -59,19 +55,18 @@ class Home extends React.Component {
 
 	render = () => {
 		
-		const data = [
-			["time", "open"],
-			[8, 12],
-			[4, 5.5],
-			[11, 14],
-			[4, 5],
-			[3, 3.5],
-			[6.5, 7]
-		];
-	 
+		const btc_data = ( this.props.BTC_data.Data ) ? this.props.getFormatData( this.props.BTC_data.Data, this.props.selectBTC ) : false
+		const eth_data = ( this.props.ETH_data.Data ) ? this.props.getFormatData( this.props.ETH_data.Data, this.props.selectETH ) : false
+		
 		const options = {
-			hAxis: { title: "time", viewWindow: { min: 0, max: 15 } },
-			vAxis: { title: "open", viewWindow: { min: 0, max: 15 } }
+			hAxis: { 
+				title: 'Time', 
+				//viewWindow: { min: 0, max: 15 } 
+			},
+			vAxis: { 
+				title: this.props.selectBTC, 
+				//viewWindow: { min: 0, max: 15 } 
+			}
 		};		
 
 		return (
@@ -86,16 +81,18 @@ class Home extends React.Component {
 							<Option value="close">Close</Option>
 						</Select>
 					}>
+					{ btc_data ? (
 						<div className="dash-chart">
 							<Chart
-								chartType="ScatterChart"
+								chartType="LineChart"
 								options={options}
-								data={data}
+								data={btc_data}
 								width="100%"
-								height="400px"
+								height="600px"
 								legendToggle
 							/>
-						</div>
+						</div> ) : null 
+					}						
 					</Card>
 				</Col>
 				<Col span={12}>
@@ -108,15 +105,18 @@ class Home extends React.Component {
 							<Option value="close">Close</Option>
 						</Select>
 					}>
+					{ eth_data ? (
 						<div className="dash-chart">					
 							<Chart
-								chartType="ScatterChart"
-								data={[["Age", "Weight"], [4, 5.5], [8, 12]]}
+								chartType="LineChart"
+								options={options}
+								data={eth_data}
 								width="100%"
-								height="400px"
+								height="600px"
 								legendToggle
 							/>
-						</div>							
+						</div> ) : null 
+					}
 					</Card>
 				</Col>
 			</Row>

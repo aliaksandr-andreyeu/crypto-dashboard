@@ -9295,7 +9295,7 @@ body {
     .dashboard .main-layout.ant-layout .dash-select.ant-select {
       position: relative;
       display: block;
-      width: 90px; }
+      width: 80px; }
       .dashboard .main-layout.ant-layout .dash-select.ant-select .ant-select-selection {
         height: 28px; }
         .dashboard .main-layout.ant-layout .dash-select.ant-select .ant-select-selection .ant-select-selection__rendered {

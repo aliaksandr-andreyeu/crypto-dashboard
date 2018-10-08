@@ -13,6 +13,8 @@ import Ethereum from "./Ethereum"
 
 import "./index.sass"
 
+import moment from "moment"
+
 const { Header, Sider, Content } = Layout
 
 class App extends React.Component {
@@ -64,6 +66,46 @@ class App extends React.Component {
 		})
 	}
 	
+	getFormatData = ( v, ticket ) => {
+		
+		if ( typeof ticket == 'undefined' ) return []
+
+		let el = ticket
+		let data = []
+
+		if ( el == 'all' ) {
+			
+			data.push( [ 'Time', 'Close', 'High', 'Low', 'Open' ] )
+			
+			if ( typeof v != 'undefined' && Array.isArray( v ) && v.length > 0 ) {
+				
+				v.forEach(function( elem, i, arr ) {
+					
+					data.push( [ moment( elem['time'] ).format('Do MMM, hh:mm'), elem['close'], elem['high'], elem['low'], elem['open'] ] )	
+					
+				});	
+				
+			}
+
+		} else {
+			
+			data.push( [ 'Time', el ] )
+			
+			if ( typeof v != 'undefined' && Array.isArray( v ) && v.length > 0 ) {
+				
+				v.forEach(function( elem, i, arr ) {
+					
+					data.push( [ moment( elem['time'] ).format('Do MMM, hh:mm'), elem[el] ] )	
+					
+				});	
+				
+			}
+			
+		}
+		
+		return data
+	}
+	
 	render = () => {
 		
 		const routes = [
@@ -79,6 +121,7 @@ class App extends React.Component {
 					handleSetDataETH={this.handleSetDataETH} 
 					BTC_data={this.state.BTC_data} 
 					ETH_data={this.state.ETH_data} 
+					getFormatData={this.getFormatData}
 				/>,
 			},
 			{
@@ -87,7 +130,8 @@ class App extends React.Component {
 					handleSelectBTC={this.handleSelectCmpBTC} 
 					selectBTC={this.state.selectCmpBTC} 
 					handleSetDataBTC={this.handleSetDataBTC} 
-					BTC_data={this.state.BTC_data} 
+					BTC_data={this.state.BTC_data}
+					getFormatData={this.getFormatData}
 				/>
 			},
 			{
@@ -96,7 +140,8 @@ class App extends React.Component {
 					handleSelectETH={this.handleSelectCmpETH} 
 					selectETH={this.state.selectCmpETH} 
 					handleSetDataETH={this.handleSetDataETH} 
-					ETH_data={this.state.ETH_data} 
+					ETH_data={this.state.ETH_data}
+					getFormatData={this.getFormatData}
 				/>
 			},
 		]

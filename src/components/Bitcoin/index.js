@@ -25,8 +25,6 @@ class Bitcoin extends React.Component {
 			try {
 				const btc_response = await axios.get( btc_url )
 				
-				console.log( btc_response.data )
-
 				this.props.handleSetDataBTC( btc_response.data )
 				
 			} catch ( error ) {
@@ -37,7 +35,20 @@ class Bitcoin extends React.Component {
 	}		
 
 	render = () => {
+
+		const btc_data = ( this.props.BTC_data.Data ) ? this.props.getFormatData( this.props.BTC_data.Data, this.props.selectBTC ) : false
 		
+		const options = {
+			hAxis: { 
+				title: 'Time', 
+				//viewWindow: { min: 0, max: 15 } 
+			},
+			vAxis: { 
+				title: this.props.selectBTC, 
+				//viewWindow: { min: 0, max: 15 } 
+			}
+		};		
+	
 		return (
 			<Row gutter={16}>
 				<Col span={24}>
@@ -50,15 +61,18 @@ class Bitcoin extends React.Component {
 							<Option value="close">Close</Option>
 						</Select>
 					}>
+					{ btc_data ? (
 						<div className="dash-chart">
 							<Chart
-								chartType="ScatterChart"
-								data={[["Age", "Weight"], [4, 5.5], [8, 12]]}
+								chartType="LineChart"
+								options={options}
+								data={btc_data}
 								width="100%"
-								height="400px"
+								height="600px"
 								legendToggle
 							/>
-						</div>
+						</div> ) : null 
+					}									
 					</Card>
 				</Col>
 			</Row>

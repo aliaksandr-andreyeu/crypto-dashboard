@@ -25,8 +25,6 @@ class Ethereum extends React.Component {
 			try {
 				const eth_response = await axios.get( eth_url )
 				
-				console.log( eth_response.data )
-				
 				this.props.handleSetDataETH( eth_response.data )
 
 			} catch ( error ) {
@@ -37,6 +35,19 @@ class Ethereum extends React.Component {
 	}		
 
 	render = () => {
+		
+		const eth_data = ( this.props.ETH_data.Data ) ? this.props.getFormatData( this.props.ETH_data.Data, this.props.selectETH ) : false
+		
+		const options = {
+			hAxis: { 
+				title: 'Time', 
+				//viewWindow: { min: 0, max: 15 } 
+			},
+			vAxis: { 
+				title: this.props.selectBTC, 
+				//viewWindow: { min: 0, max: 15 } 
+			}
+		};		
 		
 		return (
 			<Row gutter={16}>
@@ -50,15 +61,18 @@ class Ethereum extends React.Component {
 							<Option value="close">Close</Option>
 						</Select>
 					}>
+					{ eth_data ? (					
 						<div className="dash-chart">
 							<Chart
-								chartType="ScatterChart"
-								data={[["Age", "Weight"], [4, 5.5], [8, 12]]}
+								chartType="LineChart"
+								options={options}
+								data={eth_data}
 								width="100%"
-								height="400px"
+								height="600px"
 								legendToggle
 							/>
-						</div>
+						</div> ) : null 
+					}	
 					</Card>
 				</Col>
 			</Row>
