@@ -2,6 +2,8 @@ const webpack = require("webpack")
 const path = require("path")
 
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
 
 const themeVariables = []
 themeVariables["@border-radius-base"] = "4px"
@@ -14,6 +16,27 @@ const plugins = [
 		filename: "./style.css",
 	}),
 ]
+
+const optimization = {
+	minimizer: [
+		new UglifyJsPlugin({
+			parallel: 4, 
+			extractComments: true, 
+			uglifyOptions: {
+				warnings: false,
+				parse: {},
+				compress: {},
+				mangle: true, 
+				output: null,
+				toplevel: false,
+				nameCache: null,
+				ie8: false,
+				keep_fnames: false,
+			}			
+		}), 
+		new OptimizeCSSAssetsPlugin({})
+	],
+}
 
 module.exports = {
 	entry: ["@babel/polyfill", "./src/index.js"],
@@ -51,4 +74,5 @@ module.exports = {
 		],
 	},
 	plugins,
+	optimization,
 }
