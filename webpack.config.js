@@ -13,7 +13,7 @@ themeVariables["@primary-color"] = "#00397a"
 const plugins = [
 	new MiniCssExtractPlugin({
 		path: __dirname,
-		filename: "./style.css",
+		filename: "./css/style.css",
 	}),
 ]
 
@@ -42,7 +42,7 @@ module.exports = {
 	entry: ["@babel/polyfill", "./src/index.js"],
 	output: {
 		path: __dirname,
-		filename: "./main.js",
+		filename: "./js/main.js",
 	},
 	module: {
 		rules: [
@@ -74,5 +74,5 @@ module.exports = {
 		],
 	},
 	plugins,
-	optimization,
+	//optimization,
 }
