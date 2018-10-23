@@ -8,17 +8,13 @@ const WrappedLogin = Form.create()(Login)
 
 const Access = () => (
 	<Switch>
-		<Route path="/login" render={props => <WrappedLogin {...props} />} />
+		<Route path="/login" exact={true} render={props => <WrappedLogin {...props} />} />
 		<Route
 			render={props =>
 					localStorage.getItem( "admin" ) == "1" ? (
 					<App {...props} />
 				) : (
-					<Redirect
-						to={{
-							pathname: "/login",
-						}}
-					/>
+					<Redirect to="/login" />
 				)
 			}
 		/>

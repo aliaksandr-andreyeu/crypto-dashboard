@@ -10,6 +10,9 @@ import { Link, NavLink, Redirect, Route, Switch, withRouter } from "react-router
 import Home from "./Home"
 import Bitcoin from "./Bitcoin"
 import Ethereum from "./Ethereum"
+import NothingFound from "./NothingFound"
+
+import axios from 'axios'
 
 import "./index.sass"
 
@@ -106,6 +109,20 @@ class App extends React.Component {
 		return data
 	}
 	
+	componentDidMount = () => {
+		this.timer = setInterval(()=> this.getItems(), 1000)
+	}
+
+	componentWillUnmount = () => {
+		this.timer = null
+	}
+
+	getItems = ( func ) => {
+		func
+		
+		console.log( 'send' )
+	}	
+	
 	render = () => {
 		
 		const routes = [
@@ -122,10 +139,11 @@ class App extends React.Component {
 					BTC_data={this.state.BTC_data} 
 					ETH_data={this.state.ETH_data} 
 					getFormatData={this.getFormatData}
+					getItems={this.getItems}
 				/>,
-			},
-			{
+			}, {
 				path: "/bitcoin",
+				exact: true,				
 				render: () => <Bitcoin 
 					handleSelectBTC={this.handleSelectCmpBTC} 
 					selectBTC={this.state.selectCmpBTC} 
@@ -133,9 +151,9 @@ class App extends React.Component {
 					BTC_data={this.state.BTC_data}
 					getFormatData={this.getFormatData}
 				/>
-			},
-			{
+			}, {
 				path: "/ethereum",
+				exact: true, 			
 				render: () => <Ethereum 
 					handleSelectETH={this.handleSelectCmpETH} 
 					selectETH={this.state.selectCmpETH} 
@@ -143,7 +161,10 @@ class App extends React.Component {
 					ETH_data={this.state.ETH_data}
 					getFormatData={this.getFormatData}
 				/>
-			},
+			}, {
+				path: "*",
+				render: () => <NothingFound />
+			},			
 		]
 
 		const routesMap = routes.map((route, i) => <Route {...route} key={i} />)
@@ -247,6 +268,7 @@ class App extends React.Component {
 								<Switch>
 									<Redirect exact from="/login" to="/" />
 									{routesMap}
+									{ /* <Redirect to="/nothing-found" /> */}
 								</Switch>
 							</Content>
 						</Layout>

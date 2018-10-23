@@ -19,8 +19,26 @@ class Home extends React.Component {
 	onChangeEth = ( v ) => {
 		this.props.handleSelectETH( v )
 	}
-	
+
+	getBTC = async () => {
+		const btc_url = 'https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=100'
+		
+		try {
+			const btc_response = await axios.get( btc_url )
+			
+			this.props.handleSetDataBTC( btc_response.data )
+			
+		} catch ( error ) {
+			
+			console.log( error )
+		}
+		
+	}
 	componentDidMount = async () => {
+		
+		this.props.getItems( this.getBTC() )
+		
+		this.getBTC()
 		
 		if ( !this.props.BTC_data ) {
 
