@@ -8,6 +8,8 @@ const Option = Select.Option
 
 import { Chart } from "react-google-charts"
 
+import socketIOClient from "socket.io-client";
+
 import axios from 'axios'
 
 class Home extends React.Component {
@@ -36,39 +38,96 @@ class Home extends React.Component {
 	}
 	componentDidMount = async () => {
 		
-		this.props.getItems( this.getBTC() )
 		
-		this.getBTC()
+		const socket = socketIOClient( "wss://streamer.cryptocompare.com", {
+	transports: ["websocket"],
+	upgrade: false,
+	secure: true,
+})
 		
-		if ( !this.props.BTC_data ) {
+		
+socket.on('connect', ( data ) => {
+	console.log( 'connect', data )
+});
 
-			const btc_url = 'https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=100'
-			
-			try {
-				const btc_response = await axios.get( btc_url )
-				
-				this.props.handleSetDataBTC( btc_response.data )
-				
-			} catch ( error ) {
-				
-				console.log( error )
-			}
-		}
+socket.on('event', ( data ) => {
+	console.log( 'event', data )
+});
 
-		if ( !this.props.ETH_data ) {
+socket.on('disconnect', ( data ) => {
+	console.log( 'disconnect', data )
+});
+
+socket.on('m', ( data ) => {
+	console.log( 'm', data )
+});
+
+socket.emit("SubAdd" )
+
+
+
+		
+// socket.on("outgoing data", ( data ) => )
+// socket.onopen = function() {
+  // console.log("Соединение установлено.");
+// };
+
+// socket.onclose = function(event) {
+  // if (event.wasClean) {
+    // console.log('Соединение закрыто чисто');
+  // } else {
+    // console.log('Обрыв соединения'); // например, "убит" процесс сервера
+  // }
+  // console.log('Код: ' + event.code + ' причина: ' + event.reason);
+// };
+
+// socket.onmessage = function(event) {
+  // console.log("Получены данные " + event.data);
+// };
+
+// socket.onerror = function(error) {
+  // console.log("Ошибка " + error.message);
+// };		
+		
+		
+		
+		
+		
+
+		
+		// this.props.getItems( this.getBTC() )
+		
+		// this.getBTC()
+		
+		// if ( !this.props.BTC_data ) {
+
+			// const btc_url = 'https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=100'
 			
-			const eth_url = 'https://min-api.cryptocompare.com/data/histoday?fsym=ETH&tsym=USD&limit=100'
+			// try {
+				// const btc_response = await axios.get( btc_url )
+				
+				// this.props.handleSetDataBTC( btc_response.data )
+				
+			// } catch ( error ) {
+				
+				// console.log( error )
+			// }
+		// }
+
+		// if ( !this.props.ETH_data ) {
 			
-			try {
-				const eth_response = await axios.get( eth_url )
+			// const eth_url = 'https://min-api.cryptocompare.com/data/histoday?fsym=ETH&tsym=USD&limit=100'
+			
+			// try {
+				// const eth_response = await axios.get( eth_url )
 				
-				this.props.handleSetDataETH( eth_response.data )
+				// this.props.handleSetDataETH( eth_response.data )
 				
-			} catch ( error ) {
+			// } catch ( error ) {
 				
-				console.log( error )
-			}
-		}
+				// console.log( error )
+			// }
+		// }
 	}		
 
 	render = () => {

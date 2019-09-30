@@ -1,2 +1,2 @@
 # crypto-dashboard
-Crypto Bitcoin/Ethereum Dashboard
+Crypto Analytics Dashboard
