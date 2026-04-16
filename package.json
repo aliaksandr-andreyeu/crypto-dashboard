@@ -28,7 +28,7 @@
 	"dependencies": {
 		"@babel/polyfill": "^7.0.0",
 		"antd": "^3.9.3",
-		"axios": "^0.18.0",
+		"axios": "^0.31.0",
 		"event-source-polyfill": "^0.0.16",
 		"eventsource-polyfill": "^0.9.6",
 		"history": "^4.7.2",
